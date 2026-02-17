@@ -1,0 +1,106 @@
+.section {
+    padding: var(--section-spacing) 0;
+    overflow: hidden;
+    background: var(--bg-dark);
+    /* Opaque background to cover sticky hero */
+    position: relative;
+    z-index: 20;
+}
+
+.heading {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+}
+
+.feed {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.post {
+    width: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+}
+
+.post:hover {
+    transform: translateY(-10px);
+}
+
+.postHeader {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--border-light);
+    border-radius: 50%;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.postImage {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-weight: 700;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.actions {
+    padding: 0.8rem 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.actionIcon {
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.actionIcon:hover {
+    color: var(--primary);
+}
+
+.caption {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.likes {
+    padding: 0 1rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .heading {
+        font-size: 2.5rem;
+    }
+}

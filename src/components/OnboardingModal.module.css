@@ -1,0 +1,329 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.progressBar {
+    width: 100%;
+    height: 6px;
+    background: #f1f5f9;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--primary, #cbf382);
+    transition: width 0.3s ease;
+}
+
+.content {
+    padding: 2.5rem;
+    overflow-y: auto;
+}
+
+.stepContainer {
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #111;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.primaryBtn {
+    background: #000;
+    color: #fff;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 99px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.primaryBtn:hover:not(:disabled) {
+    background: var(--primary, #cbf382);
+    color: var(--primary-text, #000);
+    transform: translateY(-1px);
+}
+
+.primaryBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ccc;
+}
+
+.secondaryBtn {
+    background: transparent;
+    color: #666;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-top: 1rem;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* STEP 1: STYLES - PILL LAYOUT */
+.styleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.stylePill {
+    padding: 12px 24px;
+    border-radius: 99px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stylePill:hover {
+    border-color: var(--primary, #cbf382);
+    background: #f8fafc;
+}
+
+.stylePill.selected {
+    background: var(--primary, #cbf382);
+    border-color: var(--primary, #cbf382);
+    color: var(--primary-text, #000);
+    box-shadow: 0 4px 12px rgba(203, 243, 130, 0.4);
+}
+
+/* STEP 2: SIZE & FIT - PILLS */
+.formGroup {
+    margin-bottom: 2rem;
+}
+
+.formGroup label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.pillGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.pill {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 99px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.pill:hover {
+    border-color: #ccc;
+}
+
+.activePill {
+    background: var(--primary, #cbf382);
+    color: var(--primary-text, #000);
+    border-color: var(--primary, #cbf382);
+    font-weight: 600;
+}
+
+/* STEP 3: CREATORS */
+.creatorList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.creatorItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    transition: border-color 0.2s;
+}
+
+.creatorItem:hover {
+    border-color: #e2e8f0;
+}
+
+.creatorInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.creatorAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+.followBtn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 99px;
+    border: 1px solid #000;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.followBtn:hover {
+    background: #f8f9fa;
+}
+
+.followBtn.following {
+    background: var(--primary, #cbf382);
+    border-color: var(--primary, #cbf382);
+    color: var(--primary-text, #000);
+}
+
+/* STEP 4: PREVIEW */
+.tryOnPreview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.placeholderBox {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 3/4;
+    background: #f8fafc;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+}
+
+/* STEP 5: INPUTS */
+.input,
+.textarea {
+    width: 100%;
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: #000;
+    background: #fff;
+}
+
+.textarea {
+    min-height: 120px;
+    resize: none;
+}
+
+/* STEP 6: LIST */
+.listGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.listItem {
+    padding: 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.listItem:hover {
+    border-color: #ccc;
+    background: #fdfdfd;
+}
+
+.selectedItem {
+    border-color: var(--primary, #cbf382);
+    background: rgba(203, 243, 130, 0.1);
+}

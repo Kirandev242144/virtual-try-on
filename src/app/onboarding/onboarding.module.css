@@ -1,0 +1,281 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    color: #111;
+}
+
+.progressBar {
+    width: 100%;
+    height: 4px;
+    background: #f1f5f9;
+}
+
+.progressFill {
+    height: 100%;
+    background: #000;
+    transition: width 0.3s ease;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stepContainer {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.primaryBtn {
+    background: #000;
+    color: #fff;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 99px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: opacity 0.2s;
+}
+
+.primaryBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.secondaryBtn {
+    background: transparent;
+    color: #666;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* STEP 1: GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.card {
+    aspect-ratio: 1;
+    background: #f8fafc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card.selected {
+    border-color: #000;
+}
+
+.cardContent {
+    font-weight: 600;
+    z-index: 2;
+}
+
+.check {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #000;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* STEP 2: PILLS */
+.formGroup {
+    margin-bottom: 2rem;
+}
+
+.formGroup label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.pillGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.pill {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 99px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.activePill {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* STEP 3: CREATORS */
+.creatorList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.creatorItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+}
+
+.creatorInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.creatorAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.followBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    border: 1px solid #000;
+    background: transparent;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.followBtn.following {
+    background: #000;
+    color: #fff;
+}
+
+/* STEP 4: PREVIEW */
+.tryOnPreview {
+    display: flex;
+    justify-content: center;
+}
+
+.placeholderBox {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 3/4;
+    background: #f8fafc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.overlayText {
+    position: absolute;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* STEP 5: INPUTS */
+.input,
+.textarea {
+    width: 100%;
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.textarea {
+    min-height: 120px;
+    resize: none;
+}
+
+/* STEP 6: LIST */
+.listGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.listItem {
+    padding: 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selectedItem {
+    border-color: #000;
+    background: #f8fafc;
+}

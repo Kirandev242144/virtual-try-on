@@ -1,0 +1,313 @@
+/* Full Width Navbar Container */
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. Top Bar (Promo) */
+.topBar {
+    background: #000;
+    color: #fff;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 2. Main Header (Logo, Search, Actions) */
+.mainHeader {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+.mainHeaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* Search Bar - Boxy & Wide */
+.searchContainer {
+    flex: 1;
+    max-width: 700px;
+    /* Wider */
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchInput {
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 0.9rem 1rem 0.9rem 3rem;
+    border-radius: 4px;
+    /* Less rounded */
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    background: #fff;
+    border-color: #000;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.clearSearchBtn {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clearSearchBtn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+/* Right Actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+.navItem:hover {
+    color: #A6E479;
+    /* Brand Accent */
+}
+
+.iconBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    /* Icon + Label if needed, sticking to icon for now */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.iconBtn:hover {
+    color: var(--primary);
+}
+
+.cartBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--primary);
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadBtn {
+    background: #000;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    /* Sharper */
+    border: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.uploadBtn:hover {
+    background: var(--primary);
+    color: #000;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+
+
+
+/* User Profile & Auth Buttons */
+.userProfile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 200px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    z-index: 1001;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.dropdownItem {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdownItem:hover {
+    background: #f8f9fa;
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loginBtn {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 99px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.loginBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #111 0%, #444 100%);
+}
+
+.loginBtn:active {
+    transform: translateY(0);
+}
+
+.logoutBtn {
+    background: transparent;
+    color: #666;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+    color: #ef4444;
+    border-color: #ef4444;
+    background: #fff;
+}
+
+@media (max-width: 900px) {
+    .searchContainer {
+        display: none;
+    }
+
+    .bottomNav {
+        display: none;
+        /* Collapsible menu needed for mobile */
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Next.js: debug in Brave",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
+            "runtimeArgs": [
+                "--user-data-dir=${imageWorkspaceFolder}/.vscode/brave-profile"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,426 @@
+.feedContainer {
+    padding-top: 8rem;
+    min-height: 100vh;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding-bottom: 0.2rem;
+    position: relative;
+    transition: color 0.2s;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.tab.active {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--text-primary);
+}
+
+.tab.active::after {
+    display: none;
+    /* Remove the pill indicator */
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    /* Larger gap for breathability */
+    padding-bottom: 4rem;
+}
+
+/* Sharp Editorial Card */
+.postCard {
+    background: transparent;
+    border-radius: 0;
+    /* SHARP EDGES */
+    overflow: visible;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.postCard:hover {
+    transform: translateY(-5px);
+}
+
+/* Header - Minimal */
+.cardHeader {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.authorAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 0;
+    /* Square avatars for brutalist/sharp look? Or keep circle for contrast? Let's go circle for human element */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.authorName {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.authorLabel {
+    display: none;
+}
+
+.followBtn {
+    background: #A6E479;
+    /* Requested Green */
+    border: none;
+    color: #02231c;
+    /* Dark text for contrast */
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+}
+
+.followBtn:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+.followBtn.following {
+    background: #E6E6E6;
+    /* Requested Grey */
+    color: #333333;
+    /* Requested Dark Grey */
+    border: 1px solid transparent;
+}
+
+.followBtn.following:hover {
+    border-color: #ccc;
+    background: #ddd;
+}
+
+/* Image Grid - Seamless Sharp */
+.imageGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* Main image dominant */
+    gap: 1px;
+    /* Razor thin gap */
+    height: 450px;
+    /* Taller editorial look */
+    border-radius: 0;
+    /* SHARP */
+    overflow: hidden;
+    background: #fff;
+    /* White lines between images */
+    border: 1px solid #eee;
+    /* Subtle border container */
+}
+
+.mainImageContainer {
+    position: relative;
+    height: 100%;
+}
+
+.sideImagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    height: 100%;
+}
+
+.sideImageWrapper {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.postImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: brightness(0.98);
+    /* Slight cinematic dim */
+}
+
+.postCard:hover .postImage {
+    transform: scale(1.03);
+    /* Subtle zoom */
+    filter: brightness(1);
+}
+
+.moreOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    backdrop-filter: blur(2px);
+}
+
+/* Footer - Clean */
+.cardFooter {
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    /* Align top if title wraps */
+    justify-content: space-between;
+    border: none;
+}
+
+.storyLabel {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0;
+    background: none;
+}
+
+.actions {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.actionBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.actionBtn:hover {
+    transform: none;
+    background: transparent;
+    color: var(--text-primary);
+    border: none;
+}
+
+/* Try On Button - Sharp & Bold */
+.tryOnBtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 1rem;
+    border-radius: 0;
+    /* SHARP */
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    z-index: 10;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(100%);
+    /* Hidden by default */
+    opacity: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.postCard:hover .tryOnBtn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.tryOnBtn:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* Play Button Overlay */
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+    z-index: 5;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+.postCard:hover .playOverlay {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.playButton {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.postCard:hover .playButton {
+    transform: scale(1.1);
+    background: #fff;
+}
+
+/* User Social Card */
+.userCard {
+    background: transparent;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.userCard:hover {
+    transform: translateY(-5px);
+}
+
+.userContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.userImageContainer {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    /* Match Vendor height */
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.userImage {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.userCard:hover .userImage {
+    transform: scale(1.03);
+}
+
+.triedBadge {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(2, 35, 28, 0.9);
+    /* Brand Dark */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 99px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.triedBadge::before {
+    content: '✨';
+    font-size: 0.9rem;
+}
+
+.userActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+}
+
+.userMetrics {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.metricBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.metricBtn:hover {
+    color: var(--primary-text);
+    /* or Primary Accent */
+}
+
+.trySimilarBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.trySimilarBtn:hover {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+}
