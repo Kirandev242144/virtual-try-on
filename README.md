@@ -78,37 +78,12 @@ The database schema spans six major tables:
 
 ---
 
-## ⚙️ Installation & Local Development
+## 🔮 Future Roadmap & Planned Updates
 
-### 1. Prerequisites
-*   Node.js (v18+)
-*   Supabase Account & Project
+We plan to implement the following high-impact features in future releases of VogueSocial:
 
-### 2. Environment Configuration
-Create a `.env.local` file in the root directory:
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-
-NEXTAUTH_SECRET=your_nextauth_secret_key
-NEXTAUTH_URL=http://localhost:3000
-
-# Stripe & RunPod (Optional for mock mode)
-STRIPE_SECRET_KEY=your_stripe_secret_key
-RUNPOD_API_KEY=your_runpod_api_key
-RUNPOD_ENDPOINT_ID=your_runpod_endpoint_id
-```
-
-### 3. Spin Up Dev Server
-To run the project locally under Turbopack:
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-### 4. Build Production Bundle
-To compile the site prior to Vercel/production deployment:
-```bash
-npm run build
-```
+1. **Instagram/Facebook Shopping Graph API Auto-Publishing**: Real-time product inventory sync automation as soon as a designer publishes a product on the platform.
+2. **Enhanced AI Virtual Try-On Capabilities**: Incorporating multi-pose options, high-definition model adjustments, and accessory overlays (e.g. sunglasses, bags, hats).
+3. **In-App Direct Checkout**: Facilitating seamless purchases inside Instagram/Facebook Shops directly linked to the VogueSocial Stripe escrow account.
+4. **Real-Time WebAR Try-On (Camera Feed)**: Implementing a real-time WebAR interface where users can preview clothing styles using their device's camera.
+5. **Social Styling Community Hub**: Enabling users to build public virtual lookbooks, vote on friend outfits, follow specific stylists, and share style recommendations.
