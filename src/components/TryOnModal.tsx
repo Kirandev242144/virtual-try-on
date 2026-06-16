@@ -97,37 +97,119 @@ const TryOnModal = ({ isOpen, onClose, garmentImage, category = 'tops' }: TryOnM
 
             formData.append('category', selectedCategory);
 
-            setStatusMessage("Generating Virtual Try-On... (This may take ~30s)");
+            setStatusMessage("Submitting try-on job to RunPod serverless...");
 
-            // CLOUD API (RunPod 4090 - Fast!)
-            // Replace 'v7lif3hwz72hlo-8000' with your actual RunPod ID if it changes.
-            // When deploying to production, use an environment variable (NEXT_PUBLIC_API_URL).
-            const CLOUD_API_URL = process.env.NEXT_PUBLIC_VTON_API_URL || 'https://v7lif3hwz72hlo-8000.proxy.runpod.net/try-on';
-            const LOCAL_API_URL = 'http://127.0.0.1:8000/try-on';
-
-            // Use Cloud by default for speed, fallback to Local if cloud fails (optional logic)
-            const targetUrl = CLOUD_API_URL;
-
-            // Call API
-            console.log(`Sending request to: ${targetUrl}`);
-            const apiResponse = await fetch(targetUrl, {
+            // First, try the secure Next.js server-side route
+            const localApiUrl = '/api/try-on';
+            console.log(`Submitting image data to secure server-side endpoint: ${localApiUrl}`);
+            
+            const apiResponse = await fetch(localApiUrl, {
                 method: 'POST',
                 body: formData,
             });
 
             if (!apiResponse.ok) {
                 const errorData = await apiResponse.json();
-                throw new Error(errorData.detail || "Server Error");
+                
+                // If server-side keys are missing, gracefully fall back to direct proxy endpoint (old client-side behavior)
+                if (errorData.error && errorData.error.includes("environment variables")) {
+                    const fallbackUrl = process.env.NEXT_PUBLIC_VTON_API_URL || 'https://v7lif3hwz72hlo-8000.proxy.runpod.net/try-on';
+                    console.warn(`[RunPod] Server keys missing. Falling back to direct proxy HTTP call: ${fallbackUrl}`);
+                    setStatusMessage("Using proxy endpoint fallback...");
+
+                    const proxyResponse = await fetch(fallbackUrl, {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    if (!proxyResponse.ok) {
+                        const proxyError = await proxyResponse.json();
+                        throw new Error(proxyError.detail || "Proxy Server Error");
+                    }
+
+                    const proxyData = await proxyResponse.json();
+                    if (proxyData.image) {
+                        setImagePreview(proxyData.image);
+                        setViewMode('generated');
+                        setState('RESULT');
+                        return;
+                    } else {
+                        throw new Error("No image returned from proxy");
+                    }
+                }
+
+                throw new Error(errorData.error || "Server Error");
             }
 
             const data = await apiResponse.json();
 
-            if (data.image) {
+            // Check if job is submitted as a RunPod serverless job requiring polling
+            if (data.jobId) {
+                const jobId = data.jobId;
+                let jobStatus = data.status || 'IN_QUEUE';
+                setStatusMessage(`Job created (ID: ${jobId}). Waiting for worker...`);
+
+                const pollInterval = 3000; // Poll every 3 seconds
+                const maxPollAttempts = 40; // ~2 minutes timeout
+                let attempts = 0;
+
+                while (attempts < maxPollAttempts) {
+                    attempts++;
+                    await new Promise(resolve => setTimeout(resolve, pollInterval));
+
+                    // Query our secure status API route
+                    const statusResponse = await fetch(`/api/try-on/status?jobId=${jobId}`);
+                    if (!statusResponse.ok) {
+                        const statusError = await statusResponse.json();
+                        throw new Error(statusError.error || "Failed to retrieve job status");
+                    }
+
+                    const statusData = await statusResponse.json();
+                    jobStatus = statusData.status;
+                    
+                    setStatusMessage(`Job status: ${jobStatus.replace('_', ' ')} (Attempt ${attempts})...`);
+
+                    if (jobStatus === 'COMPLETED') {
+                        const output = statusData.output;
+                        let outputImage = '';
+
+                        // Retrieve the image from RunPod output (handles string, array, or nested object)
+                        if (typeof output === 'string') {
+                            outputImage = output;
+                        } else if (Array.isArray(output) && output.length > 0) {
+                            outputImage = output[0];
+                        } else if (output && typeof output === 'object') {
+                            outputImage = output.image || output.img || output.url || '';
+                        }
+
+                        if (!outputImage) {
+                            throw new Error("RunPod job completed but returned no output image");
+                        }
+
+                        // Attach base64 prefix if missing
+                        if (outputImage.startsWith('iVBORw0KGgo')) {
+                            outputImage = `data:image/png;base64,${outputImage}`;
+                        }
+
+                        setImagePreview(outputImage);
+                        setViewMode('generated');
+                        setState('RESULT');
+                        return; // Successfully completed!
+                    }
+
+                    if (jobStatus === 'FAILED' || jobStatus === 'CANCELLED') {
+                        throw new Error(statusData.error || `RunPod job failed with status: ${jobStatus}`);
+                    }
+                }
+
+                throw new Error("Try-On generation timed out. Please try again.");
+            } else if (data.image) {
+                // If route returned image directly (synchronous)
                 setImagePreview(data.image);
                 setViewMode('generated');
                 setState('RESULT');
             } else {
-                throw new Error("No image returned");
+                throw new Error("No jobId or output image received from server");
             }
         } catch (error) {
             console.error("Try-On Error", error);

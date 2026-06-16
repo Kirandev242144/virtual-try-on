@@ -1,0 +1,106 @@
+{
+  "kiranironhide.ironhide@gmail.com": {
+    "connected": true,
+    "page_name": "VogueSocial Boutique",
+    "catalog_name": "VS_Apparel_Catalog",
+    "auto_sync": true,
+    "clothing_only": true,
+    "logs": [
+      {
+        "timestamp": "2026-06-15T05:59:57.126Z",
+        "type": "info",
+        "message": "Settings updated. Connected: YES, Auto-Sync: ACTIVE."
+      },
+      {
+        "timestamp": "2026-06-15T05:59:54.999Z",
+        "type": "info",
+        "message": "Settings updated. Connected: YES, Auto-Sync: DISABLED."
+      },
+      {
+        "timestamp": "2026-06-15T05:59:52.777Z",
+        "type": "info",
+        "message": "Settings updated. Connected: NO, Auto-Sync: DISABLED."
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "info",
+        "message": "Triggered manual Catalog Push to Facebook Shop..."
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "info",
+        "message": "[Meta Graph API] POST /v18.0/catalog_VS_Apparel_Catalog/batch_items"
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "info",
+        "message": "[Meta Graph API] Processing 3 items for synchronization..."
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "success",
+        "message": "[Meta Graph API] Item pushed successfully: \"Meta Fitted Cropped Vest\" (ID: fb_d23aa1de)"
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "success",
+        "message": "[Meta Graph API] Item pushed successfully: \"Meta High-Rise Cargo Pants\" (ID: fb_c8245bab)"
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "success",
+        "message": "[Meta Graph API] Item pushed successfully: \"Meta Knit Slip Dress\" (ID: fb_a8d7e756)"
+      },
+      {
+        "timestamp": "2026-06-15T05:59:04.721Z",
+        "type": "success",
+        "message": "[Sync Service] Successfully synchronized 3 products to Facebook Catalog."
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.377Z",
+        "type": "info",
+        "message": "Triggered manual Facebook Import..."
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.377Z",
+        "type": "info",
+        "message": "[Meta Graph API] GET /v18.0/page_VogueSocial Boutique/subscribed_apps"
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.377Z",
+        "type": "info",
+        "message": "[Meta Graph API] Fetching product catalog matching clothing filters..."
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.543Z",
+        "type": "success",
+        "message": "[Meta Graph API] Pulled clothing product: \"Meta Fitted Cropped Vest\" ($38) -> Saved to DB (ID: d23aa1de)"
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.647Z",
+        "type": "success",
+        "message": "[Meta Graph API] Pulled clothing product: \"Meta High-Rise Cargo Pants\" ($72) -> Saved to DB (ID: c8245bab)"
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.750Z",
+        "type": "success",
+        "message": "[Meta Graph API] Pulled clothing product: \"Meta Knit Slip Dress\" ($88) -> Saved to DB (ID: a8d7e756)"
+      },
+      {
+        "timestamp": "2026-06-14T04:27:49.750Z",
+        "type": "success",
+        "message": "[Import Service] Sync finished. Imported 3 clothing items into database catalog."
+      },
+      {
+        "timestamp": "2026-06-14T04:27:35.395Z",
+        "type": "info",
+        "message": "Settings updated. Connected: YES, Auto-Sync: DISABLED."
+      },
+      {
+        "timestamp": "2026-06-14T04:27:35.395Z",
+        "type": "info",
+        "message": "Facebook Integration initialized."
+      }
+    ]
+  }
+}

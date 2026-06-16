@@ -116,6 +116,18 @@ const Navbar = ({ onSearch }: NavbarProps) => {
                                         <Link href="/profile" className={styles.dropdownItem} onClick={() => setIsDropdownOpen(false)}>
                                             Profile
                                         </Link>
+                                        {/* @ts-ignore */}
+                                        {session.user?.role === 'admin' && (
+                                            <Link href="/admin/dashboard" className={styles.dropdownItem} onClick={() => setIsDropdownOpen(false)}>
+                                                Admin Dashboard
+                                            </Link>
+                                        )}
+                                        {/* @ts-ignore */}
+                                        {(session.user?.role === 'vendor' || session.user?.role === 'admin') && (
+                                            <Link href="/merchant/dashboard" className={styles.dropdownItem} onClick={() => setIsDropdownOpen(false)}>
+                                                Merchant Dashboard
+                                            </Link>
+                                        )}
                                         <button className={styles.dropdownItem} onClick={() => signOut()}>
                                             Sign Out
                                         </button>

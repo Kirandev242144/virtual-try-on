@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${dmSans.variable}`}>
+      <body className={`${inter.variable} ${dmSans.variable}`} suppressHydrationWarning>
         <AuthProvider>
           <SmoothScrolling />
           <main>{children}</main>

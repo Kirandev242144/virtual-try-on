@@ -69,143 +69,151 @@ const Feed = ({ searchQuery = '' }: FeedProps) => {
                 {/* Grid */}
                 {filteredPosts.length > 0 ? (
                     <div className={styles.grid}>
-                        {filteredPosts.map((post) => (
-                            <Link href={`/product/${post.id}`} key={post.id} className={post.type === 'user' ? styles.userCard : styles.postCard}>
-                                {/* Header */}
-                                <div className={styles.cardHeader}>
-                                    <div className={styles.authorAvatar} style={{ position: 'relative', overflow: 'hidden' }}>
-                                        {post.avatar ? (
-                                            <Image
-                                                src={post.avatar}
-                                                alt={post.author}
-                                                fill
-                                                style={{ objectFit: 'cover' }}
-                                            />
-                                        ) : null}
+                        {filteredPosts.map((post) => {
+                            const brandHandle = post.author.toLowerCase().replace(/[^a-z0-9]/g, '');
+                            return (
+                                <div key={post.id} className={post.type === 'user' ? styles.userCard : styles.postCard}>
+                                    {/* Header */}
+                                    <div className={styles.cardHeader}>
+                                        <Link href={`/brand/${brandHandle}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', cursor: 'pointer', flex: 1 }}>
+                                            <div className={styles.authorAvatar} style={{ position: 'relative', overflow: 'hidden' }}>
+                                                {post.avatar ? (
+                                                    <Image
+                                                        src={post.avatar}
+                                                        alt={post.author}
+                                                        fill
+                                                        style={{ objectFit: 'cover' }}
+                                                    />
+                                                ) : null}
+                                            </div>
+                                            <div className={styles.authorInfo}>
+                                                <span className={styles.authorLabel}>{post.type === 'user' ? 'Tried by' : 'By'}</span>
+                                                <span className={styles.authorName}>{post.author}</span>
+                                            </div>
+                                        </Link>
+                                        <button
+                                            className={`${styles.followBtn} ${following[post.id] ? styles.following : ''}`}
+                                            onClick={(e) => toggleFollow(post.id, e)}
+                                        >
+                                            {following[post.id] ? 'Following' : 'Follow'}
+                                        </button>
                                     </div>
-                                    <div className={styles.authorInfo}>
-                                        <span className={styles.authorLabel}>{post.type === 'user' ? 'Tried by' : 'By'}</span>
-                                        <span className={styles.authorName}>{post.author}</span>
-                                    </div>
-                                    <button
-                                        className={`${styles.followBtn} ${following[post.id] ? styles.following : ''}`}
-                                        onClick={(e) => toggleFollow(post.id, e)}
-                                    >
-                                        {following[post.id] ? 'Following' : 'Follow'}
-                                    </button>
-                                </div>
 
-                                {/* Content based on Type */}
-                                {post.type === 'user' ? (
-                                    // USER CARD CONTENT
-                                    <div className={styles.userContent}>
-                                        <div className={styles.userImageContainer}>
-                                            {post.image ? (
-                                                <Image
-                                                    src={post.image}
-                                                    alt={`Tried by ${post.author}`}
-                                                    fill
-                                                    className={styles.userImage}
-                                                />
-                                            ) : null}
-                                            <div className={styles.triedBadge}>
-                                                Tried via VogueSocial
-                                            </div>
-                                        </div>
-                                        <div className={styles.userActions}>
-                                            <div className={styles.userMetrics}>
-                                                <button className={styles.metricBtn}>
-                                                    <Heart size={18} /> {post.likes}
-                                                </button>
-                                                <button className={styles.metricBtn}>
-                                                    <MessageCircle size={18} /> {post.comments}
-                                                </button>
-                                            </div>
-                                            <button className={styles.trySimilarBtn}>Try Similar</button>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    // VENDOR CARD CONTENT
-                                    <>
-                                        <div className={styles.imageGrid}>
-                                            {/* Main Image (Left) */}
-                                            <div className={styles.mainImageContainer}>
-                                                {post.type === 'video' ? (
-                                                    <>
-                                                        <video
-                                                            src={post.videoUrl}
-                                                            className={styles.postImage}
-                                                            style={{ objectFit: 'cover' }}
-                                                            loop
-                                                            muted
-                                                            playsInline
-                                                            autoPlay // Autoplay for demo effect
-                                                        />
-                                                        <div className={styles.playOverlay}>
-                                                            <div className={styles.playButton}>
-                                                                <Play size={24} fill="currentColor" />
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    post.images && post.images[0] ? (
+                                    {/* Link for Content */}
+                                    <Link href={`/product/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                        {/* Content based on Type */}
+                                        {post.type === 'user' ? (
+                                            // USER CARD CONTENT
+                                            <div className={styles.userContent}>
+                                                <div className={styles.userImageContainer}>
+                                                    {post.image ? (
                                                         <Image
-                                                            src={post.images[0]}
-                                                            alt="Main product"
+                                                            src={post.image}
+                                                            alt={`Tried by ${post.author}`}
                                                             fill
-                                                            className={styles.postImage}
-                                                        />
-                                                    ) : null
-                                                )}
-                                                <button className={styles.tryOnBtn}>
-                                                    <Shirt size={14} /> Try On
-                                                </button>
-                                            </div>
-
-                                            {/* Side Images (Right) */}
-                                            <div className={styles.sideImagesContainer}>
-                                                <div className={styles.sideImageWrapper}>
-                                                    {post.images && post.images[1] ? (
-                                                        <Image
-                                                            src={post.images[1]}
-                                                            alt="Product Detail"
-                                                            fill
-                                                            className={styles.postImage}
+                                                            className={styles.userImage}
                                                         />
                                                     ) : null}
-                                                </div>
-                                                <div className={styles.sideImageWrapper}>
-                                                    {post.images && post.images[2] ? (
-                                                        <Image
-                                                            src={post.images[2]}
-                                                            alt="Product Detail"
-                                                            fill
-                                                            className={styles.postImage}
-                                                        />
-                                                    ) : null}
-                                                    <div className={styles.moreOverlay}>
-                                                        +{post.moreCount}
+                                                    <div className={styles.triedBadge}>
+                                                        Tried via VogueSocial
                                                     </div>
                                                 </div>
+                                                <div className={styles.userActions}>
+                                                    <div className={styles.userMetrics}>
+                                                        <div className={styles.metricBtn}>
+                                                            <Heart size={18} /> {post.likes}
+                                                        </div>
+                                                        <div className={styles.metricBtn}>
+                                                            <MessageCircle size={18} /> {post.comments}
+                                                        </div>
+                                                    </div>
+                                                    <div className={styles.trySimilarBtn}>Try Similar</div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        ) : (
+                                            // VENDOR CARD CONTENT
+                                            <>
+                                                <div className={styles.imageGrid}>
+                                                    {/* Main Image (Left) */}
+                                                    <div className={styles.mainImageContainer}>
+                                                        {post.type === 'video' ? (
+                                                            <>
+                                                                <video
+                                                                    src={post.videoUrl}
+                                                                    className={styles.postImage}
+                                                                    style={{ objectFit: 'cover' }}
+                                                                    loop
+                                                                    muted
+                                                                    playsInline
+                                                                    autoPlay // Autoplay for demo effect
+                                                                />
+                                                                <div className={styles.playOverlay}>
+                                                                    <div className={styles.playButton}>
+                                                                        <Play size={24} fill="currentColor" />
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        ) : (
+                                                            post.images && post.images[0] ? (
+                                                                <Image
+                                                                    src={post.images[0]}
+                                                                    alt="Main product"
+                                                                    fill
+                                                                    className={styles.postImage}
+                                                                />
+                                                            ) : null
+                                                        )}
+                                                        <div className={styles.tryOnBtn}>
+                                                            <Shirt size={14} /> Try On
+                                                        </div>
+                                                    </div>
 
-                                        {/* Footer */}
-                                        <div className={styles.cardFooter}>
-                                            <span className={styles.storyLabel}>{post.storyTitle}</span>
-                                            <div className={styles.actions}>
-                                                <button className={styles.actionBtn}>
-                                                    <Heart size={20} />
-                                                </button>
-                                                <button className={styles.actionBtn}>
-                                                    <Share2 size={20} />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </Link>
-                        ))}
+                                                    {/* Side Images (Right) */}
+                                                    <div className={styles.sideImagesContainer}>
+                                                        <div className={styles.sideImageWrapper}>
+                                                            {post.images && post.images[1] ? (
+                                                                <Image
+                                                                    src={post.images[1]}
+                                                                    alt="Product Detail"
+                                                                    fill
+                                                                    className={styles.postImage}
+                                                                />
+                                                            ) : null}
+                                                        </div>
+                                                        <div className={styles.sideImageWrapper}>
+                                                            {post.images && post.images[2] ? (
+                                                                <Image
+                                                                    src={post.images[2]}
+                                                                    alt="Product Detail"
+                                                                    fill
+                                                                    className={styles.postImage}
+                                                                />
+                                                            ) : null}
+                                                            <div className={styles.moreOverlay}>
+                                                                +{post.moreCount}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Footer */}
+                                                <div className={styles.cardFooter}>
+                                                    <span className={styles.storyLabel}>{post.storyTitle}</span>
+                                                    <div className={styles.actions}>
+                                                        <div className={styles.actionBtn}>
+                                                            <Heart size={20} />
+                                                        </div>
+                                                        <div className={styles.actionBtn}>
+                                                            <Share2 size={20} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+                                    </Link>
+                                </div>
+                            );
+                        })}
                     </div>
                 ) : (
                     <div style={{ textAlign: 'center', padding: '4rem 0', color: '#666' }}>
