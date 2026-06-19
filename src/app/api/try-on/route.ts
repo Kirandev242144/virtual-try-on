@@ -15,7 +15,13 @@ export async function POST(req: Request) {
         const formData = await req.formData();
         const personFile = formData.get('person_image') as File | null;
         const garmentFile = formData.get('garment_image') as File | null;
-        const category = formData.get('category') as string || 'tops';
+        const rawCategory = (formData.get('category') as string || 'tops').toLowerCase();
+        let idmVtonCategory = 'upper_body';
+        if (['bottoms', 'bottoms & trousers', 'lower', 'lower_body'].includes(rawCategory)) {
+            idmVtonCategory = 'lower_body';
+        } else if (['one-pieces', 'dresses', 'dresses & jumpsuits', 'dress'].includes(rawCategory)) {
+            idmVtonCategory = 'dress';
+        }
 
         if (!personFile || !garmentFile) {
             return NextResponse.json({ error: 'Missing person_image or garment_image file.' }, { status: 400 });
@@ -42,7 +48,7 @@ export async function POST(req: Request) {
                 input: {
                     person_image: personBase64,
                     garment_image: garmentBase64,
-                    category: category
+                    category: idmVtonCategory
                 }
             })
         });
